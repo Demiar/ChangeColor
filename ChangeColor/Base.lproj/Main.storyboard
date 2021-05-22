@@ -51,11 +51,11 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="hdu-H6-N4b">
+                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.20000000000000001" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="hdu-H6-N4b">
                                                         <rect key="frame" x="120" y="0.0" width="162" height="31"/>
                                                         <color key="minimumTrackTintColor" systemColor="systemRedColor"/>
                                                         <connections>
-                                                            <action selector="addRedColor:" destination="BYZ-38-t0r" eventType="valueChanged" id="3Av-tW-oTB"/>
+                                                            <action selector="changeRedValue:" destination="BYZ-38-t0r" eventType="valueChanged" id="3Av-tW-oTB"/>
                                                         </connections>
                                                     </slider>
                                                 </subviews>
@@ -81,11 +81,11 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="frY-yy-Bmh">
+                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.29999999999999999" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="frY-yy-Bmh">
                                                         <rect key="frame" x="120" y="0.0" width="162" height="31"/>
                                                         <color key="minimumTrackTintColor" systemColor="systemGreenColor"/>
                                                         <connections>
-                                                            <action selector="addGreenColor:" destination="BYZ-38-t0r" eventType="valueChanged" id="AxC-4J-yGb"/>
+                                                            <action selector="changeGreenValue:" destination="BYZ-38-t0r" eventType="valueChanged" id="AxC-4J-yGb"/>
                                                         </connections>
                                                     </slider>
                                                 </subviews>
@@ -111,11 +111,11 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="6WW-H9-Jui">
+                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.40000000000000002" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="6WW-H9-Jui">
                                                         <rect key="frame" x="120" y="0.0" width="162" height="31"/>
                                                         <color key="minimumTrackTintColor" systemColor="systemBlueColor"/>
                                                         <connections>
-                                                            <action selector="addBlueColor:" destination="BYZ-38-t0r" eventType="valueChanged" id="9zn-7Z-iaf"/>
+                                                            <action selector="changeBlueColor:" destination="BYZ-38-t0r" eventType="valueChanged" id="9zn-7Z-iaf"/>
                                                         </connections>
                                                     </slider>
                                                 </subviews>
@@ -134,10 +134,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="blueValue" destination="ieh-YL-HOf" id="MIP-Ui-jGb"/>
+                        <outlet property="blueLabel" destination="ieh-YL-HOf" id="MIP-Ui-jGb"/>
+                        <outlet property="blueSlider" destination="6WW-H9-Jui" id="WXo-Bj-NWI"/>
                         <outlet property="colorView" destination="Lml-Hp-YnS" id="aSz-ij-Jv3"/>
-                        <outlet property="greenValue" destination="De1-24-DAv" id="niK-oP-xbX"/>
-                        <outlet property="redValue" destination="f0c-Ck-wmA" id="EX6-PB-2n5"/>
+                        <outlet property="greenLabel" destination="De1-24-DAv" id="niK-oP-xbX"/>
+                        <outlet property="greenSlider" destination="frY-yy-Bmh" id="eGy-dq-xiV"/>
+                        <outlet property="redLabel" destination="f0c-Ck-wmA" id="EX6-PB-2n5"/>
+                        <outlet property="redSlider" destination="hdu-H6-N4b" id="Lsg-rM-CMY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

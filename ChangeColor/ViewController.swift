@@ -10,37 +10,60 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var colorView: UIView!
     
-    @IBOutlet weak var redValue: UILabel!
-    @IBOutlet weak var greenValue: UILabel!
-    @IBOutlet weak var blueValue: UILabel!
+    @IBOutlet weak var redLabel: UILabel!
+    @IBOutlet weak var greenLabel: UILabel!
+    @IBOutlet weak var blueLabel: UILabel!
     
-    var red: CGFloat = 0.5
-    var green: CGFloat = 0.5
-    var blue: CGFloat = 0.5
+    @IBOutlet weak var redSlider: UISlider!
+    @IBOutlet weak var greenSlider: UISlider!
+    @IBOutlet weak var blueSlider: UISlider!
     
-    @IBAction func addRedColor(_ sender: UISlider) {
-        sender.minimumTrackTintColor = UIColor.red
-        red = CGFloat(sender.value)
-        redValue.text = String(format: "%.2f", sender.value)
-        displayColors()
+    override func viewDidLoad() {
+        colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value),
+                                            green: CGFloat(greenSlider.value),
+                                            blue: CGFloat(blueSlider.value),
+                                            alpha: 1.0
+        )
+        
+        redLabel.text = String(format: "%.2f", CGFloat(redSlider.value))
+        greenLabel.text = String(format: "%.2f", CGFloat(greenSlider.value))
+        blueLabel.text = String(format: "%.2f", CGFloat(blueSlider.value))
     }
     
-    @IBAction func addGreenColor(_ sender: UISlider) {
-        sender.minimumTrackTintColor = UIColor.green
-        green = CGFloat(sender.value)
-        greenValue.text = String(format: "%.2f", sender.value)
-        displayColors()
+    @IBAction func changeRedValue(_ sender: UISlider) {
+        changeColor(slider: sender,
+                    color: redLabel,
+                    tintColor: UIColor.red,
+                    sliderColor: redSlider
+        )
     }
     
-    @IBAction func addBlueColor(_ sender: UISlider) {
-        sender.minimumTrackTintColor = UIColor.blue
-        blue = CGFloat(sender.value)
-        blueValue.text = String(format: "%.2f", sender.value)
-        displayColors()
+    @IBAction func changeGreenValue(_ sender: UISlider) {
+        changeColor(slider: sender,
+                    color: greenLabel,
+                    tintColor: UIColor.green,
+                    sliderColor: greenSlider
+        )
     }
     
-    func displayColors() {
-        colorView.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+    @IBAction func changeBlueColor(_ sender: UISlider) {
+        changeColor(slider: sender,
+                    color: blueLabel,
+                    tintColor: UIColor.blue,
+                    sliderColor: blueSlider
+        )
+    }
+    
+    func changeColor(slider: UISlider, color: UILabel, tintColor: UIColor, sliderColor: UISlider) {
+        slider.minimumTrackTintColor = tintColor
+        sliderColor.value = slider.value
+        color.text = String(format: "%.2f", slider.value)
+        
+        colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value),
+                                            green: CGFloat(greenSlider.value),
+                                            blue: CGFloat(blueSlider.value),
+                                            alpha: 1.0
+        )
     }
 }
 
