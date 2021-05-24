@@ -124,13 +124,33 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfS-XB-cG9">
+                                <rect key="frame" x="20" y="352" width="280" height="49"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DHm-Lq-Bd3">
+                                <rect key="frame" x="20" y="409" width="280" height="49"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cfS-XB-cG9" secondAttribute="trailing" constant="20" id="1mU-EB-D1d"/>
+                            <constraint firstItem="cfS-XB-cG9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="352" id="4Rs-qb-0pd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="cfS-XB-cG9" secondAttribute="bottom" constant="167" id="7kq-ri-b8r"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DHm-Lq-Bd3" secondAttribute="trailing" constant="20" id="9cA-nO-2lz"/>
                             <constraint firstItem="pdz-uF-DPX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="K11-O9-ooI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DHm-Lq-Bd3" secondAttribute="bottom" constant="110" id="PQY-zV-oXr"/>
+                            <constraint firstItem="DHm-Lq-Bd3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="hb3-aV-0WP"/>
                             <constraint firstItem="pdz-uF-DPX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="lIG-fc-3O6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pdz-uF-DPX" secondAttribute="trailing" constant="20" id="lZY-tY-syK"/>
+                            <constraint firstItem="DHm-Lq-Bd3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="409" id="lim-y5-s4W"/>
+                            <constraint firstItem="cfS-XB-cG9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="u72-8g-u6z"/>
                         </constraints>
                     </view>
                     <connections>
@@ -139,8 +159,10 @@
                         <outlet property="colorView" destination="Lml-Hp-YnS" id="aSz-ij-Jv3"/>
                         <outlet property="greenLabel" destination="De1-24-DAv" id="niK-oP-xbX"/>
                         <outlet property="greenSlider" destination="frY-yy-Bmh" id="eGy-dq-xiV"/>
+                        <outlet property="hexLabel" destination="DHm-Lq-Bd3" id="eOf-R1-nCo"/>
                         <outlet property="redLabel" destination="f0c-Ck-wmA" id="EX6-PB-2n5"/>
                         <outlet property="redSlider" destination="hdu-H6-N4b" id="Lsg-rM-CMY"/>
+                        <outlet property="rgbLabel" destination="cfS-XB-cG9" id="4LK-LX-Hqf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

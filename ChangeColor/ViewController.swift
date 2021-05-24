@@ -18,6 +18,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var greenSlider: UISlider!
     @IBOutlet weak var blueSlider: UISlider!
     
+    @IBOutlet weak var rgbLabel: UILabel!
+    @IBOutlet weak var hexLabel: UILabel!
+    
     override func viewDidLoad() {
         colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value),
                                             green: CGFloat(greenSlider.value),
@@ -28,6 +31,9 @@ class ViewController: UIViewController {
         redLabel.text = String(format: "%.2f", CGFloat(redSlider.value))
         greenLabel.text = String(format: "%.2f", CGFloat(greenSlider.value))
         blueLabel.text = String(format: "%.2f", CGFloat(blueSlider.value))
+        
+        rgbLabel.text = getRGB()
+        hexLabel.text = getHex()
     }
     
     @IBAction func changeRedValue(_ sender: UISlider) {
@@ -64,6 +70,21 @@ class ViewController: UIViewController {
                                             blue: CGFloat(blueSlider.value),
                                             alpha: 1.0
         )
+        
+        rgbLabel.text = getRGB()
+        hexLabel.text = getHex()
+    }
+    
+    func getRGB() -> String {
+        return """
+            RGB(\(Int(redSlider.value * 255)), \(Int(greenSlider.value * 255)), \(Int(blueSlider.value * 255)))
+        """
+    }
+    
+    func getHex() -> String {
+        return """
+            HEX(\(String(format:"%02X", Int(redSlider.value * 255)) + String(format:"%02X", Int(greenSlider.value * 255)) + String(format:"%02X", Int(blueSlider.value * 255))))
+        """
     }
 }
 
