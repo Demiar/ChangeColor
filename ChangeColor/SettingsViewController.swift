@@ -67,6 +67,7 @@ class SettingsViewController: UIViewController {
         guard let colors = color else {return }
         changeColorLabels(color: colors)
         changeColorTextFields(color: colors)
+        changeColorSliders(color: colors)
         colorView.backgroundColor = color
     }
 
@@ -123,8 +124,14 @@ class SettingsViewController: UIViewController {
                 textField.placeholder = String(format: "%.2f", color.rgba.blue)
             }
         }
-
     }
+    
+//    private func changeSlidersValue() {
+//        guard let colors = color else { return }
+//        redSlider.value = Float(colors.rgba.red)
+//        redSlider.value = Float(colors.rgba.red)
+//        redSlider.value = Float(colors.rgba.red)
+//    }
 }
 
 extension SettingsViewController: UITextFieldDelegate {
