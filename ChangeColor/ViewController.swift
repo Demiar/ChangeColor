@@ -7,84 +7,28 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    @IBOutlet weak var colorView: UIView!
+class ViewController: UIViewController, settingsDelegate {
     
-    @IBOutlet weak var redLabel: UILabel!
-    @IBOutlet weak var greenLabel: UILabel!
-    @IBOutlet weak var blueLabel: UILabel!
-    
-    @IBOutlet weak var redSlider: UISlider!
-    @IBOutlet weak var greenSlider: UISlider!
-    @IBOutlet weak var blueSlider: UISlider!
-    
-    @IBOutlet weak var rgbLabel: UILabel!
-    @IBOutlet weak var hexLabel: UILabel!
-    
-    override func viewDidLoad() {
-        colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value),
-                                            green: CGFloat(greenSlider.value),
-                                            blue: CGFloat(blueSlider.value),
-                                            alpha: 1.0
-        )
-        
-        redLabel.text = String(format: "%.2f", CGFloat(redSlider.value))
-        greenLabel.text = String(format: "%.2f", CGFloat(greenSlider.value))
-        blueLabel.text = String(format: "%.2f", CGFloat(blueSlider.value))
-        
-        rgbLabel.text = getRGB()
-        hexLabel.text = getHex()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let settingsVC = segue.destination as? SettingsViewController else { return }
+        settingsVC.delegate = self
+        let bgColor:UIColor = view.backgroundColor!
+        var r : CGFloat = 0
+        var g : CGFloat = 0
+        var b : CGFloat = 0
+        var a: CGFloat = 0
+        if bgColor.getRed(&r, green: &g, blue: &b, alpha: &a) {
+            settingsVC.color = UIColor(red: r, green: g, blue: b, alpha: a)
+        }
     }
     
-    @IBAction func changeRedValue(_ sender: UISlider) {
-        changeColor(slider: sender,
-                    color: redLabel,
-                    tintColor: UIColor.red,
-                    sliderColor: redSlider
-        )
+    @IBAction func settingsButton(_ sender: UIButton) {
     }
     
-    @IBAction func changeGreenValue(_ sender: UISlider) {
-        changeColor(slider: sender,
-                    color: greenLabel,
-                    tintColor: UIColor.green,
-                    sliderColor: greenSlider
-        )
+    func update(color: UIColor) {
+        view.backgroundColor = color
     }
     
-    @IBAction func changeBlueColor(_ sender: UISlider) {
-        changeColor(slider: sender,
-                    color: blueLabel,
-                    tintColor: UIColor.blue,
-                    sliderColor: blueSlider
-        )
-    }
-    
-    func changeColor(slider: UISlider, color: UILabel, tintColor: UIColor, sliderColor: UISlider) {
-        slider.minimumTrackTintColor = tintColor
-        sliderColor.value = slider.value
-        color.text = String(format: "%.2f", slider.value)
-        
-        colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value),
-                                            green: CGFloat(greenSlider.value),
-                                            blue: CGFloat(blueSlider.value),
-                                            alpha: 1.0
-        )
-        
-        rgbLabel.text = getRGB()
-        hexLabel.text = getHex()
-    }
-    
-    func getRGB() -> String {
-        return """
-            RGB(\(Int(redSlider.value * 255)), \(Int(greenSlider.value * 255)), \(Int(blueSlider.value * 255)))
-        """
-    }
-    
-    func getHex() -> String {
-        return """
-            HEX(\(String(format:"%02X", Int(redSlider.value * 255)) + String(format:"%02X", Int(greenSlider.value * 255)) + String(format:"%02X", Int(blueSlider.value * 255))))
-        """
-    }
 }
+
 
