@@ -159,7 +159,7 @@ extension SettingsViewController: UITextFieldDelegate {
         let newText = oldText.replacingCharacters(in: r, with: string)
         let isNumeric = newText.isEmpty || (Double(newText) != nil)
         let numberOfDots = newText.components(separatedBy: ".").count - 1
-
+        
         let numberOfDecimalDigits: Int
         if let dotIndex = newText.firstIndex(of: ".") {
             numberOfDecimalDigits = newText.distance(from: dotIndex, to: newText.endIndex) - 1
@@ -167,7 +167,7 @@ extension SettingsViewController: UITextFieldDelegate {
             numberOfDecimalDigits = 0
         }
 
-        return isNumeric && numberOfDots <= 1 && numberOfDecimalDigits <= 2
+        return isNumeric && numberOfDots <= 1 && numberOfDecimalDigits <= 2 && Float(newText) ?? 0.00 <= 1.00
     }
 }
 
