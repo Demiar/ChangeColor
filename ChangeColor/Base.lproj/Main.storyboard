@@ -165,20 +165,29 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hjd-QF-u9E">
                                                 <rect key="frame" x="324" y="0.0" width="50" height="122"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cxW-Zp-Nen">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0.00" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cxW-Zp-Nen">
                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                        <connections>
+                                                            <action selector="changeTF:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="qyB-V0-heL"/>
+                                                        </connections>
                                                     </textField>
-                                                    <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0.00" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HNu-3E-EVs">
+                                                    <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0.00" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HNu-3E-EVs">
                                                         <rect key="frame" x="0.0" y="44" width="50" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
+                                                        <connections>
+                                                            <action selector="changeTF:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="Y2T-9n-KdX"/>
+                                                        </connections>
                                                     </textField>
-                                                    <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0.00" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qmZ-SI-l3D">
+                                                    <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0.00" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qmZ-SI-l3D">
                                                         <rect key="frame" x="0.0" y="88" width="50" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
+                                                        <connections>
+                                                            <action selector="changeTF:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="IBQ-mO-R4j"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -224,7 +233,13 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
+                        <outlet property="blueSlider" destination="6WW-H9-Jui" id="jZM-ly-ioA"/>
+                        <outlet property="blueTF" destination="qmZ-SI-l3D" id="ZXn-5C-5cr"/>
                         <outlet property="colorView" destination="Lml-Hp-YnS" id="BPV-ho-uxI"/>
+                        <outlet property="greenSlider" destination="frY-yy-Bmh" id="mU4-ur-Ca6"/>
+                        <outlet property="greenTF" destination="HNu-3E-EVs" id="fPk-ll-N05"/>
+                        <outlet property="redSlider" destination="hdu-H6-N4b" id="Bkb-wN-WPP"/>
+                        <outlet property="redTF" destination="cxW-Zp-Nen" id="ucf-md-CNo"/>
                         <outletCollection property="colorLabels" destination="f0c-Ck-wmA" collectionClass="NSMutableArray" id="APp-oL-HDs"/>
                         <outletCollection property="colorLabels" destination="De1-24-DAv" collectionClass="NSMutableArray" id="SGM-zR-ZyL"/>
                         <outletCollection property="colorLabels" destination="ieh-YL-HOf" collectionClass="NSMutableArray" id="5Qg-td-3gQ"/>

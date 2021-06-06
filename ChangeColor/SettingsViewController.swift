@@ -17,13 +17,25 @@ class SettingsViewController: UIViewController {
     @IBOutlet var colorLabels: [UILabel]!
     
     @IBOutlet var colorSliders: [UISlider]!
-    @IBOutlet var colorTextFields: [UITextField]!
+    @IBOutlet weak var redSlider: UISlider!
+    @IBOutlet weak var greenSlider: UISlider!
+    @IBOutlet weak var blueSlider: UISlider!
     
+    @IBOutlet var colorTextFields: [UITextField]!
+    @IBOutlet weak var redTF: UITextField!
+    @IBOutlet weak var greenTF: UITextField!
+    @IBOutlet weak var blueTF: UITextField!
     
     var color: UIColor?
     var delegate: settingsDelegate?
     
     override func viewDidLoad() {
+        redTF.delegate = self;
+        self.addDoneButtonOnKeyboard(textField: redTF)
+        greenTF.delegate = self;
+        self.addDoneButtonOnKeyboard(textField: greenTF)
+        blueTF.delegate = self;
+        self.addDoneButtonOnKeyboard(textField: blueTF)
         guard let colors = color else { return }
         colorView.backgroundColor = colors
         changeColorLabels(color: colors)
@@ -32,13 +44,9 @@ class SettingsViewController: UIViewController {
         
     }
     @IBAction func changeSlider(_ sender: UISlider) {
-        var array:[Float] = []
-        for slider in colorSliders {
-            array.append(slider.value)
-        }
-        color = UIColor(red: CGFloat(array[0]),
-                        green: CGFloat(array[1]),
-                        blue: CGFloat(array[2]),
+        color = UIColor(red: CGFloat(redSlider.value),
+                        green: CGFloat(greenSlider.value),
+                        blue: CGFloat(blueSlider.value),
                         alpha: 1.0
         )
         guard let colors = color else {return }
@@ -46,6 +54,35 @@ class SettingsViewController: UIViewController {
         changeColorTextFields(color: colors)
         colorView.backgroundColor = color
     }
+    
+    @IBAction func changeTF(_ sender: UITextField) {
+        let red = Float(redTF.text!) ?? redSlider.value
+        let green = Float(greenTF.text!) ?? greenSlider.value
+        let blue = Float(blueTF.text!) ?? blueSlider.value
+        color = UIColor(red: CGFloat(red),
+                        green: CGFloat(green),
+                        blue: CGFloat(blue),
+                        alpha: 1.0
+        )
+        guard let colors = color else {return }
+        changeColorLabels(color: colors)
+        changeColorTextFields(color: colors)
+        colorView.backgroundColor = color
+    }
+
+
+    @IBAction func saveSettings(_ sender: UIButton) {
+        guard let colors = color else { return }
+        delegate?.update(color: colors)
+        dismiss(animated: true, completion: nil)
+    }
+    
+//    func changeColor(slider: UISlider, label: UILabel, tintColor: UIColor, sliderColor: UISlider) {
+//        slider.minimumTrackTintColor = tintColor
+//        sliderColor.value = slider.value
+//        label.text = String(format: "%.2f", slider.value)
+//        colorView.backgroundColor = color
+//    }
     
     private func changeColorLabels(color: UIColor) {
         for label in colorLabels {
@@ -88,54 +125,50 @@ class SettingsViewController: UIViewController {
         }
 
     }
-    
-//    @IBAction func changeRedValue(_ sender: UISlider) {
-//        changeColor(slider: sender,
-//                    label: redLabel,
-//                    tintColor: UIColor.red,
-//                    sliderColor: redSlider
-//        )
-//    }
-//
-//    @IBAction func changeGreenValue(_ sender: UISlider) {
-//        changeColor(slider: sender,
-//                    label: greenLabel,
-//                    tintColor: UIColor.green,
-//                    sliderColor: greenSlider
-//        )
-//    }
-//
-//    @IBAction func changeBlueColor(_ sender: UISlider) {
-//        changeColor(slider: sender,
-//                    label: blueLabel,
-//                    tintColor: UIColor.blue,
-//                    sliderColor: blueSlider
-//        )
-//    }
-    @IBAction func saveSettings(_ sender: UIButton) {
-        guard let colors = color else { return }
-        delegate?.update(color: colors)
-        dismiss(animated: true, completion: nil)
+}
+
+extension SettingsViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
     }
     
-    func changeColor(slider: UISlider, label: UILabel, tintColor: UIColor, sliderColor: UISlider) {
-        slider.minimumTrackTintColor = tintColor
-        sliderColor.value = slider.value
-        label.text = String(format: "%.2f", slider.value)
-        colorView.backgroundColor = color
+    func addDoneButtonOnKeyboard(textField: UITextField) {
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        doneToolbar.barStyle       = UIBarStyle.default
+        let flexSpace              = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem  = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(SettingsViewController.doneButtonAction))
+        
+        var items = [UIBarButtonItem]()
+        items.append(flexSpace)
+        items.append(done)
+        
+        doneToolbar.items = items
+        doneToolbar.sizeToFit()
+        
+        textField.inputAccessoryView = doneToolbar
     }
-    
-//    func getRGB() -> String {
-//        return """
-//            RGB(\(Int(redSlider.value * 255)), \(Int(greenSlider.value * 255)), \(Int(blueSlider.value * 255)))
-//        """
-//    }
-//    
-//    func getHex() -> String {
-//        return """
-//            HEX(\(String(format:"%02X", Int(redSlider.value * 255)) + String(format:"%02X", Int(greenSlider.value * 255)) + String(format:"%02X", Int(blueSlider.value * 255))))
-//        """
-//    }
+
+    @objc func doneButtonAction() {
+        self.view.endEditing(true);
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let oldText = textField.text, let r = Range(range, in: oldText) else {
+            return true
+        }
+
+        let newText = oldText.replacingCharacters(in: r, with: string)
+        let isNumeric = newText.isEmpty || (Double(newText) != nil)
+        let numberOfDots = newText.components(separatedBy: ".").count - 1
+
+        let numberOfDecimalDigits: Int
+        if let dotIndex = newText.firstIndex(of: ".") {
+            numberOfDecimalDigits = newText.distance(from: dotIndex, to: newText.endIndex) - 1
+        } else {
+            numberOfDecimalDigits = 0
+        }
+
+        return isNumeric && numberOfDots <= 1 && numberOfDecimalDigits <= 2
+    }
 }
 
 extension UIColor {
